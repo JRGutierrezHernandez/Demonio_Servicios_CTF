@@ -1,10 +1,12 @@
 # Monitor de CPU y RAM con Sistema Tolerante a Fallas
+<img width="383" height="292" alt="2" src="https://github.com/user-attachments/assets/e4ecc502-b399-4128-81db-95adaa45c197" />
 
 ## Descripción del Proyecto
 
 Este proyecto consiste en una aplicación desarrollada en Python que permite monitorear el uso de los recursos del sistema, específicamente el CPU y la memoria RAM, mediante una interfaz gráfica. 
 
 Además, el sistema implementa un mecanismo de **tolerancia a fallas** mediante un **servicio de Windows que funciona en segundo plano**, el cual se encarga de verificar continuamente el estado de la aplicación principal y reiniciarla automáticamente en caso de que se detenga.
+<img width="1132" height="1017" alt="1" src="https://github.com/user-attachments/assets/66912664-134c-4246-94b5-211fd86a5e2c" />
 
 El objetivo principal del proyecto es demostrar la implementación de:
 
