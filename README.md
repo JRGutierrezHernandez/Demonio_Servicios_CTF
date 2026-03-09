@@ -1,40 +1,82 @@
-## Análisis del problema y diseño del sistema
+# Monitor de CPU y RAM con Sistema Tolerante a Fallas
 
-### Problema que se desea resolver
+## Descripción del Proyecto
 
-El problema que se busca resolver es la necesidad de monitorear continuamente el uso de los recursos del sistema, específicamente el CPU y la memoria RAM. En muchos sistemas es importante supervisar estos recursos para detectar posibles problemas de rendimiento, sobrecarga del sistema o comportamientos anómalos que puedan afectar el funcionamiento de otras aplicaciones.
+Este proyecto consiste en una aplicación desarrollada en Python que permite monitorear el uso de los recursos del sistema, específicamente el CPU y la memoria RAM, mediante una interfaz gráfica. 
 
-Para solucionar este problema se desarrolló una aplicación que permite visualizar en tiempo real el consumo de CPU y memoria RAM mediante una interfaz gráfica.
+Además, el sistema implementa un mecanismo de **tolerancia a fallas** mediante un **servicio de Windows que funciona en segundo plano**, el cual se encarga de verificar continuamente el estado de la aplicación principal y reiniciarla automáticamente en caso de que se detenga.
 
----
+El objetivo principal del proyecto es demostrar la implementación de:
 
-### Por qué requiere ejecución en segundo plano
-
-El sistema requiere ejecutarse en segundo plano porque el monitoreo debe realizarse de forma continua, incluso si el usuario no está interactuando directamente con la aplicación. 
-
-Para lograr esto se implementó un servicio del sistema operativo que funciona como un demonio de monitoreo. Este servicio se ejecuta en segundo plano y se encarga de verificar periódicamente si la aplicación principal sigue en ejecución.
-
-De esta manera se garantiza que el sistema de monitoreo permanezca activo y disponible en todo momento.
+- Procesos en segundo plano
+- Monitoreo continuo
+- Manejo de fallas
+- Servicios del sistema operativo
 
 ---
 
-### Qué tipo de falla podría ocurrir
+# Análisis del problema y diseño del sistema
 
-Una posible falla que podría ocurrir es que la aplicación principal deje de ejecutarse debido a diferentes factores, como:
+## Problema que se desea resolver
 
-- Cierre accidental por parte del usuario
-- Error inesperado del programa
-- Fallos del sistema operativo
-- Terminación del proceso por falta de recursos
+El problema que se busca resolver es la necesidad de monitorear continuamente el uso de los recursos del sistema, particularmente el CPU y la memoria RAM. Estos recursos son fundamentales para el correcto funcionamiento de cualquier computadora, y su monitoreo permite detectar situaciones de sobrecarga, fallas o comportamientos anómalos que puedan afectar el rendimiento del sistema.
 
-Cuando esto sucede, el sistema de monitoreo deja de funcionar y se pierde la supervisión de los recursos del sistema.
+Para atender esta necesidad se desarrolló una aplicación que permite visualizar en tiempo real el consumo de CPU y memoria RAM mediante una interfaz gráfica.
 
 ---
 
-### Estrategia de tolerancia a fallas
+## Por qué requiere ejecución en segundo plano
 
-Para resolver este problema se implementó una estrategia de tolerancia a fallas basada en monitoreo continuo y reinicio automático del proceso.
+El monitoreo de recursos debe realizarse de manera constante para que la información sea útil y actualizada. Debido a esto, el sistema necesita ejecutarse en segundo plano sin depender de la interacción directa del usuario.
 
-Un servicio de Windows se encarga de revisar periódicamente si la aplicación principal está activa. Si el servicio detecta que la aplicación no se encuentra en ejecución, automáticamente inicia nuevamente el proceso.
+Para lograrlo se implementó un **servicio del sistema operativo Windows** que funciona como un demonio. Este servicio se ejecuta de forma continua y se encarga de supervisar el estado de la aplicación principal.
 
-Esta estrategia permite garantizar la disponibilidad del sistema de monitoreo y reducir el impacto de fallas inesperadas.
+De esta forma el sistema puede seguir funcionando incluso si el usuario no está utilizando activamente la aplicación.
+
+---
+
+## Qué tipo de falla podría ocurrir
+
+Durante la ejecución del sistema pueden ocurrir diferentes tipos de fallas que provoquen que la aplicación principal deje de funcionar. Algunas de estas fallas pueden ser:
+
+- Cierre accidental de la aplicación por parte del usuario
+- Errores inesperados dentro del programa
+- Terminación del proceso por el sistema operativo
+- Problemas relacionados con los recursos del sistema
+
+Cuando ocurre alguna de estas situaciones, la aplicación deja de ejecutarse y el monitoreo del sistema se interrumpe.
+
+---
+
+## Estrategia de tolerancia a fallas
+
+Para garantizar la continuidad del sistema se implementó una estrategia de tolerancia a fallas basada en **monitoreo continuo y reinicio automático del proceso**.
+
+El servicio de Windows revisa periódicamente si la aplicación principal se encuentra en ejecución. En caso de detectar que el proceso ha finalizado o que no está activo, el servicio inicia nuevamente la aplicación.
+
+Esta estrategia permite mantener el sistema funcionando incluso ante fallas inesperadas, asegurando que el monitoreo de los recursos del sistema continúe disponible.
+
+---
+
+# Características del sistema
+
+- Monitoreo del uso de **CPU en tiempo real**
+- Monitoreo del uso de **memoria RAM**
+- **Interfaz gráfica** desarrollada con Tkinter
+- **Servicio de Windows ejecutándose en segundo plano**
+- Reinicio automático de la aplicación en caso de falla
+- Supervisión continua del estado del sistema
+
+---
+
+# Tecnologías utilizadas
+
+El proyecto fue desarrollado utilizando las siguientes tecnologías:
+
+- **Python 3**
+- **Tkinter** para la interfaz gráfica
+- **psutil** para obtener información del sistema
+- **pywin32** para la creación de servicios en Windows
+
+---
+
